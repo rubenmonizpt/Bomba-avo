@@ -1,5 +1,3 @@
- // To upload you need to double tap reset button after starting to upload
- 
  #include <EEPROM.h>  
  #include <TimeAlarms.h>
  #include <DS3232RTC.h>  
@@ -8,8 +6,8 @@
  
  // pins 
  int ledauto_pin = 44;
- int stopsw_pin = 43;
- int startsw_pin = 45; 
+ int stopsw_pin = 45;
+ int startsw_pin = 43; 
  int autosw_pin = 42; 
  int motor_relay_pin = 47;
   
@@ -32,7 +30,7 @@ void setup() {
      myRTC.begin();    
      setSyncProvider(myRTC.get);
 
-     pinMode(ledauto_pin, OUTPUT); 
+     pinMode(ledauto_pin, INPUT_PULLUP); 
      pinMode(motor_relay_pin, OUTPUT);
      
      pinMode(startsw_pin, INPUT_PULLUP);
@@ -54,7 +52,7 @@ void setup() {
       Alarm.alarmRepeat(dowFriday,10,0,0,WeeklyAlarm); // Alarme de inverno
     
      
-      myRTC.writeRTC(16,0); // RTC aging offset (+1 = 0.1ppm) Fazer as contas para afinal da proxima "manutenção". Valor positivo=relogio anda mais devagar
+      myRTC.writeRTC(16,0); // RTC aging offset (+1 = 0.1ppm) Fazer as contas para afinar na proxima "manutenção". Valor positivo=relogio anda mais devagar  24-08-2022 actualizaçao
       wdt_enable(WDTO_8S);  // watchdog       
  }
  
